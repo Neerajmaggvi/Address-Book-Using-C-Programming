@@ -124,6 +124,9 @@ void createContact(AddressBook *addressBook)
         printf("Maximum attempts reached. Program terminated.\n");
         return;
     }
+    
+    // After validation copy the name into the structure.
+    strcpy(addressBook->contacts[addressBook->contactCount].name, name);
 }
 
 void searchContact(AddressBook *addressBook) 

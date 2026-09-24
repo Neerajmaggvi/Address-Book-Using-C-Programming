@@ -204,8 +204,173 @@ void createContact(AddressBook *addressBook)
         return;
     }
 
+    // After validation copy the name into the structure.
+    strcpy(addressBook->contacts[addressBook->contactCount].phone, phone);
 
 
+    // ---------------------- EMAIL ID VALIDATION ----------------------
+    char email[20];
+    int email_attempts = 0;
+
+    while(email_attempts < 3)
+    {
+
+        printf("Enter the email: ");
+        scanf(" %s", email);
+
+        // Only one @ and . validation.
+        int symbol_count = 0;
+        int dot_count = 0;
+
+        for(int i = 0; email[i] != '\0'; i++)
+        {
+            if(email[i] == '@')
+            {
+                symbol_count++;
+            }
+
+            if(email[i] == '.')
+            {
+                dot_count++;
+            }
+        }
+
+        if(symbol_count != 1 || dot_count != 1)
+        {
+            printf("Invalid email! Check the symbols.\n");
+            email_attempts++;
+            continue;
+        }
+
+        // Only lowercase and digits.
+        int invalid_char = 0;
+
+        for(int i = 0; email[i] != '\0'; i++)
+        {
+            if((islower(email[i]) == 0) &&
+               (isdigit(email[i]) == 0) &&
+               email[i] != '@' &&
+               email[i] != '.')
+            {
+                invalid_char = 1;
+                break;
+            }
+        }
+
+        if(invalid_char)
+        {
+            printf("Invalid email! Check if you have entered invalid character.\n");
+            email_attempts++;
+            continue;
+        }
+
+        // Find @ and . positions.
+        int symbol_index = 0;
+        int dot_index = 0;
+
+        for(int i = 0; email[i] != '\0'; i++)
+        {
+            if(email[i] == '@')
+            {
+                symbol_index = i;
+            }
+
+            if(email[i] == '.')
+            {
+                dot_index = i;
+            }
+        }
+
+        // @ must come before .
+        if(dot_index < symbol_index)
+        {
+            printf("Invalid email! Check the placement of @ and . and re-enter.\n");
+            email_attempts++;
+            continue;
+        }
+
+        // At least one character between @ and .
+        int no_char = 0;
+
+        if(dot_index - symbol_index <= 1)
+        {
+            no_char = 1;
+        }
+        else
+        {
+            for(int i = symbol_index + 1; i < dot_index; i++)
+            {
+                if(islower(email[i]) == 0)
+                {
+                    no_char = 1;
+                    break;
+                }
+            }
+        }
+
+        if(no_char)
+        {
+            printf("Invalid email! Check if you have entered character between symbols.\n");
+            email_attempts++;
+            continue;
+        }
+
+        // After .com no character should be entered.
+        char temp_str[] = "moc.";
+
+        int len = strlen(email);
+        int j = len - 1;
+        int i = 0;
+        int invalid = 0;
+
+        while(temp_str[i] != '\0')
+        {
+            if(j < 0 || temp_str[i] != email[j])
+            {
+                invalid = 1;
+                break;
+            }
+
+            j--;
+            i++;
+        }
+
+        if(invalid)
+        {
+            printf("Invalid email! After .com no character should be present.\n");
+            email_attempts++;
+            continue;
+        }
+
+        // Find the duplicate email exists or not
+        int isduplicate_email = 0;
+        for (int i = 0; i < addressBook->contactCount; i++)
+        {
+            if (strcmp(email, addressBook->contacts[i].email) == 0)
+            {
+                isduplicate_email = 1;  
+                break; 
+            }
+        }
+
+        if(isduplicate_email)
+        {
+            printf("Invalid Phone number! There is a duplicate.\n");
+            phone_attempts++;
+            continue;
+        }
+
+        break;
+    }
+
+    if(email_attempts == 3)
+    {
+        printf("Maximum attempts. Program terminated.\n");
+        return;
+    }
+
+    strcpy(addressBook -> contacts[addressBook -> contactCount].email, email);
+    addressBook -> contactCount++;
 }
 
 void searchContact(AddressBook *addressBook) 

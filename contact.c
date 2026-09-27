@@ -820,6 +820,89 @@ void editContact(AddressBook *addressBook)
 
 void deleteContact(AddressBook *addressBook)
 {
-	/* Define the logic for deletecontact */
-   
+    char search_name[50];
+    char phone[20];
+
+    int matching_indices[100];
+    int match_count = 0;
+    int index = -1;
+
+    printf("\n========================================\n");
+    printf("            DELETE CONTACT\n");
+    printf("========================================\n");
+
+    printf("Enter the name of the contact: ");
+    scanf(" %[^\n]", search_name);
+
+    // Search by name
+    for (int i = 0; i < addressBook->contactCount; i++)
+    {
+        if (strcmp(search_name, addressBook->contacts[i].name) == 0)
+        {
+            matching_indices[match_count] = i;
+            match_count++;
+        }
+    }
+
+    // No contact found
+    if (match_count == 0)
+    {
+        printf("\nContact not found.\n");
+        return;
+    }
+
+    // Only one contact found
+    if (match_count == 1)
+    {
+        index = matching_indices[0];
+    }
+
+    // Multiple contacts found
+    else
+    {
+        printf("\nMultiple contacts found with this name.\n");
+
+        printf("Enter the phone number to identify the contact: ");
+        scanf("%s", phone);
+
+        for (int i = 0; i < match_count; i++)
+        {
+            int current_index = matching_indices[i];
+
+            if (strcmp(phone, addressBook->contacts[current_index].phone) == 0)
+            {
+                index = current_index;
+                break;
+            }
+        }
+
+        if (index == -1)
+        {
+            printf("\nInvalid phone number.\n");
+            return;
+        }
+    }
+
+    // Display contact before deleting
+    printf("\n========================================\n");
+    printf("           CONTACT TO DELETE\n");
+    printf("========================================\n");
+    printf("Name  : %s\n", addressBook->contacts[index].name);
+    printf("Phone : %s\n", addressBook->contacts[index].phone);
+    printf("Email : %s\n", addressBook->contacts[index].email);
+    printf("========================================\n");
+
+    // Shift contacts to the left
+    for (int i = index; i < addressBook->contactCount - 1; i++)
+    {
+        addressBook->contacts[i] = addressBook->contacts[i + 1];
+    }
+
+    // Reduce contact count
+    addressBook->contactCount--;
+
+    // Save updated contacts
+    saveContactsToFile(addressBook);
+
+    printf("\nContact deleted successfully!\n");
 }

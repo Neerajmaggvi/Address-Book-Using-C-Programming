@@ -39,7 +39,7 @@ int main() {
                 printf("Enter your choice: ");
                 int sortChoice;
                 scanf("%d", &sortChoice);
-                listContacts(&addressBook, sortChoice);
+                listContacts(&addressBook);
                 break;
             case 6:
                 printf("Saving and Exiting...\n");

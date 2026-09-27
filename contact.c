@@ -5,10 +5,28 @@
 #include "contact.h"
 #include "file.h"
 
-void listContacts(AddressBook *addressBook, int sortCriteria) 
+void listContacts(AddressBook *addressBook)
 {
-    // Sort contacts based on the chosen criteria
-    
+    printf("\n========================================\n");
+    printf("             CONTACT LIST\n");
+    printf("========================================\n");
+
+    if (addressBook->contactCount == 0)
+    {
+        printf("No contacts available.\n");
+        return;
+    }
+
+    for (int i = 0; i < addressBook->contactCount; i++)
+    {
+        printf("\nContact %d\n", i + 1);
+        printf("----------------------------------------\n");
+        printf("Name  : %s\n", addressBook->contacts[i].name);
+        printf("Phone : %s\n", addressBook->contacts[i].phone);
+        printf("Email : %s\n", addressBook->contacts[i].email);
+    }
+
+    printf("\n========================================\n");
 }
 
 void initialize(AddressBook *addressBook) {

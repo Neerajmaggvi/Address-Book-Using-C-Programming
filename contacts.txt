@@ -1,4 +1,4 @@
-Neeraj M,9876543782,neeraj@gamil.com
+Neeraj M,9876543782,nj@gamil.com
 Netra M,9876543289,netra@gmail.com
 Vinayak P,6789654356,vinu@patil.com
 Harish P,9876890654,harish@gmail.com

@@ -371,6 +371,7 @@ void createContact(AddressBook *addressBook)
 
 void searchContact(AddressBook *addressBook) 
 {
+    //-------------------SEARCH BY NAME--------------------
     int choice;
 
     printf("\n");
@@ -463,6 +464,7 @@ void searchContact(AddressBook *addressBook)
             }
         }
     }
+    //--------------------------SEARCH BY NAME------------------------
     else if (choice == 2)
     {
         char phone[20];
@@ -495,6 +497,7 @@ void searchContact(AddressBook *addressBook)
             printf("----------------------------------------\n");
         }
     }
+    //---------------------------SERACH BY EMAIL---------------------
     else if (choice == 3)
     {
         char email[50];

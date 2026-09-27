@@ -20,6 +20,7 @@ int main() {
         switch (choice) {
             case 1:
                 createContact(&addressBook);
+                saveContactsToFile(&addressBook);
                 break;
             case 2:
                 searchContact(&addressBook);

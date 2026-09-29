@@ -1,3 +1,10 @@
+/*Name: Neeraj Maggavi
+Batch id: 26018F
+Project name: Address Book
+Description: Address book is a project in which we add contact that are validated properly before 
+storing them into file we have options like create contact search contact edit contact delete contact
+and in the end we can also list all the contacts.*/
+
 #include <stdio.h>
 #include "contact.h"
 

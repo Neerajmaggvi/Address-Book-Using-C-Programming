@@ -3,7 +3,7 @@
 
 void saveContactsToFile(AddressBook *addressBook) {
 
-   FILE *fp = fopen("contacts.txt", "w");
+   FILE *fp = fopen("contacts.csv", "w");
 
     if (fp == NULL)
     {
@@ -25,7 +25,7 @@ void saveContactsToFile(AddressBook *addressBook) {
 
 void loadContactsFromFile(AddressBook *addressBook) {
 
-    FILE *fp = fopen("contacts.txt", "r");
+    FILE *fp = fopen("contacts.csv", "r");
 
     if (fp == NULL)
     {
